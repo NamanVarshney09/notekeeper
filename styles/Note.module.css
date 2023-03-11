@@ -1,14 +1,7 @@
-.card_container{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
-
 .card {
     border: 2px solid gray;
     padding: 1rem;
     border-radius: 0.5rem;
-    cursor: pointer;
     height: 200px;
 }
 
@@ -17,24 +10,14 @@
     border-bottom: 2px solid gray;
     padding: 0.2rem 0;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .card_description{
     font-size: 1.1rem;
     padding: 0.5rem 0;
-}
-
-.plus{
-    font-weight: 100;
-    width: 40%;
-    margin: auto;
-    display: flex;
-    font-size: 3rem;
-    align-items: center;
-    justify-content: center;
-    border: 2px dotted black;
-    border-radius: 50%;
-    /* padding-bottom:1rem; */
 }
 
 .modal {
@@ -78,7 +61,7 @@
 }
 
 .modal_title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
 }
@@ -115,7 +98,6 @@
     opacity: 1;
     visibility: visible;
 }
-
 
 .contact_form{
     width: 400px;
@@ -198,11 +180,3 @@ justify-content: center;
 align-items: center;
 }
   
-
-
-@media screen and (max-width :420px) {
-    .card_container{
-        grid-template-columns: 1fr;
-    }
-}
-
