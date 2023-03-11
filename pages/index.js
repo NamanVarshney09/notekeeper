@@ -1,15 +1,13 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import noteContext from '@/context/notes/noteContext'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Note from '@/components/Note';
 import Addnote from '@/components/Addnote';
 
 export default function Home() {
   const context = useContext(noteContext);
-  const { notes, setNotes, fetchNotes, editNote } = context;
+  const { notes, fetchNotes, editNote } = context;
   useEffect(() => {
     fetchNotes();
   }, [])
@@ -57,11 +55,15 @@ export default function Home() {
               <div className={styles.plus} onClick={() => { setToggle(1) }}>+</div>
             </div>
             {notes.map((note) => {
-              return <>
-                <Note note={note} updateNote={updateNote} key={note._id} />
+              /*
+                TODO: Each child in a list should have a unique "key" prop.
+                * While returning multiple div's elements wrap all under one unique key.
+              */
+              return <div key={note._id}>
+                <Note note={note} updateNote={updateNote} />
                 <div className={toggle === 2 ? `${styles.modal} ${styles.active_modal}` : `${styles.modal}`}>
                   <div className={styles.modal_content}>
-                    <i onClick={() => { toggleTab(0) }} className={`{fa-sharp fa-solid fa-xmark ${styles.modal_close}`}></i>
+                    <i onClick={() => { setToggle(0) }} className={`{fa-sharp fa-solid fa-xmark ${styles.modal_close}`}></i>
                     <h2 className={styles.modal_title}>Update your note !!</h2>
                     <form onSubmit={handleSubmit} className={`${styles.contact_form}`}>
                       <div className={`${styles.contact_form_div}`}>
@@ -85,7 +87,7 @@ export default function Home() {
                     </form>
                   </div>
                 </div>
-              </>
+              </div>
             })}
           </div>
         </div>
