@@ -13,7 +13,7 @@ export default function Home() {
   }, [])
 
   const [toggle, setToggle] = useState(0);
-  const [currentNote, setCurrentNote] = useState({title:"", description:"", tag:""})
+  const [currentNote, setCurrentNote] = useState({ title: "", description: "", tag: "" })
 
   const updateNote = (note) => {
     setToggle(2);
@@ -21,7 +21,7 @@ export default function Home() {
   }
 
   const handleChange = (e) => {
-    setCurrentNote({...currentNote, [e.target.name]:e.target.value})
+    setCurrentNote({ ...currentNote, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
@@ -39,57 +39,55 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="section container">
-        <div className='my-5'>
-          <h2>Notes</h2>
-          <div className={toggle === 1 ? `${styles.modal} ${styles.active_modal}` : `${styles.modal}`}>
-            <div className={styles.modal_content}>
-              <i onClick={() => { setToggle(0) }} className={`{fa-sharp fa-solid fa-xmark ${styles.modal_close}`}></i>
-              <h2 className={styles.modal_title}>Add your note !!</h2>
-              <Addnote setToggle={setToggle}/>
-            </div>
+        <h2 className={styles.section_title}>Notes</h2>
+        <div className={toggle === 1 ? `${styles.modal} ${styles.active_modal}` : `${styles.modal}`}>
+          <div className={styles.modal_content}>
+            <i onClick={() => { setToggle(0) }} className={`{fa-sharp fa-solid fa-xmark ${styles.modal_close}`}></i>
+            <h2 className={styles.modal_title}>Add your note !!</h2>
+            <Addnote setToggle={setToggle} />
           </div>
-          <div className={`${styles.card_container}`}>
-            <div className={styles.card}>
-              <div className={styles.card_title}>Add title...</div>
-              <div className={styles.card_description}>Add description...</div>
-              <div className={styles.plus} onClick={() => { setToggle(1) }}>+</div>
-            </div>
-            {notes.map((note) => {
-              /*
-                TODO: Each child in a list should have a unique "key" prop.
-                * While returning multiple div's elements wrap all under one unique key.
-              */
-              return <div key={note._id}>
-                <Note note={note} updateNote={updateNote} />
-                <div className={toggle === 2 ? `${styles.modal} ${styles.active_modal}` : `${styles.modal}`}>
-                  <div className={styles.modal_content}>
-                    <i onClick={() => { setToggle(0) }} className={`{fa-sharp fa-solid fa-xmark ${styles.modal_close}`}></i>
-                    <h2 className={styles.modal_title}>Update your note !!</h2>
-                    <form onSubmit={handleSubmit} className={`${styles.contact_form}`}>
-                      <div className={`${styles.contact_form_div}`}>
-                        <label htmlFor="title" className={`${styles.contact_form_tag}`}>Title</label>
-                        <input type="text" name="title" className={`${styles.contact_form_input}`} placeholder="Enter note title" required value={currentNote.title} onChange={handleChange}/>
-                      </div>
-                      <div className={`${styles.contact_form_div} ${styles.contact_form_area}`}>
-                        <label htmlFor="description" className={`${styles.contact_form_tag}`}>Description</label>
-                        <textarea name="description" className={`${styles.contact_form_input}`} cols="30" rows="10" minLength={10} placeholder='Enter note description' required value={currentNote.description} onChange={handleChange}></textarea>
-                      </div>
-                      <div className={`${styles.contact_form_div}`}>
-                        <label htmlFor="tag" className={`${styles.contact_form_tag}`}>Tag</label>
-                        <input type="text" name="tag" className={`${styles.contact_form_input}`} placeholder="Enter Tag for the note" value={currentNote.tag} onChange={handleChange} />
-                      </div>
-                      <div className='button_wrapper'>
-                        <button className={`button button_flex ${styles.button}`}>
-                          Update Note
-                        </button>
-                        {/* <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" /> */}
-                      </div>
-                    </form>
-                  </div>
+        </div>
+        <div className={`${styles.card_container}`}>
+          <div className={styles.card}>
+            <div className={styles.card_title}>Add title...</div>
+            <div className={styles.card_description}>Add description...</div>
+            <div className={styles.plus} onClick={() => { setToggle(1) }}>+</div>
+          </div>
+          {notes.map((note) => {
+            /*
+              TODO: Each child in a list should have a unique "key" prop.
+              * While returning multiple div's elements wrap all under one unique key.
+            */
+            return <div key={note._id}>
+              <Note note={note} updateNote={updateNote} />
+              <div className={toggle === 2 ? `${styles.modal} ${styles.active_modal}` : `${styles.modal}`}>
+                <div className={styles.modal_content}>
+                  <i onClick={() => { setToggle(0) }} className={`{fa-sharp fa-solid fa-xmark ${styles.modal_close}`}></i>
+                  <h2 className={styles.modal_title}>Update your note !!</h2>
+                  <form onSubmit={handleSubmit} className={`${styles.contact_form}`}>
+                    <div className={`${styles.contact_form_div}`}>
+                      <label htmlFor="title" className={`${styles.contact_form_tag}`}>Title</label>
+                      <input type="text" name="title" className={`${styles.contact_form_input}`} placeholder="Enter note title" required value={currentNote.title} onChange={handleChange} />
+                    </div>
+                    <div className={`${styles.contact_form_div} ${styles.contact_form_area}`}>
+                      <label htmlFor="description" className={`${styles.contact_form_tag}`}>Description</label>
+                      <textarea name="description" className={`${styles.contact_form_input}`} cols="30" rows="10" minLength={10} placeholder='Enter note description' required value={currentNote.description} onChange={handleChange}></textarea>
+                    </div>
+                    <div className={`${styles.contact_form_div}`}>
+                      <label htmlFor="tag" className={`${styles.contact_form_tag}`}>Tag</label>
+                      <input type="text" name="tag" className={`${styles.contact_form_input}`} placeholder="Enter Tag for the note" value={currentNote.tag} onChange={handleChange} />
+                    </div>
+                    <div className='button_wrapper'>
+                      <button className={`button button_flex ${styles.button}`}>
+                        Update Note
+                      </button>
+                      {/* <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" /> */}
+                    </div>
+                  </form>
                 </div>
               </div>
-            })}
-          </div>
+            </div>
+          })}
         </div>
       </div>
     </>

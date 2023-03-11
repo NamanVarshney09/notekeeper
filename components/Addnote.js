@@ -1,5 +1,5 @@
 import noteContext from '@/context/notes/noteContext'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import styles from '../styles/Addnote.module.css'
 
 const Addnote = (props) => {
@@ -26,7 +26,7 @@ const Addnote = (props) => {
                     <input ref={title} type="text" name="title" className={`${styles.contact_form_input}`} placeholder="Enter note title" required />
                 </div>
                 <div className={`${styles.contact_form_div} ${styles.contact_form_area}`}>
-                    <label htmlFor="description" className={`${styles.contact_form_tag}`}>Feedback</label>
+                    <label htmlFor="description" className={`${styles.contact_form_tag}`}>Description</label>
                     <textarea ref={description} name="description" className={`${styles.contact_form_input}`} cols="30" rows="10" minLength={10} placeholder='Enter note description' required></textarea>
                 </div>
                 <div className={`${styles.contact_form_div}`}>

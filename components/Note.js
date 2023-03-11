@@ -17,6 +17,7 @@ const Note = (props) => {
                     </div>
                 </div>
                 <div className={styles.card_description}>{note.description}</div>
+            <div className={styles.badge}>{note.tag}</div>
             </div>
         </>
     )

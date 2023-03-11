@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,9 +14,10 @@ html {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
-i{
+i {
   margin: 0 0.4rem;
   cursor: pointer;
 }
@@ -28,7 +29,7 @@ button {
 }
 
 .section {
-  padding: 4rem 0 2rem;
+  padding: 6rem 0 2rem;
 }
 
 .container {
@@ -47,3 +48,25 @@ button {
     color-scheme: dark;
   }
 } */
+
+.button {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 1.25rem 2rem;
+  border-radius: 1rem;
+  font-weight: 550;
+  font-size: 1.11rem;
+}
+
+.button_flex {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.button_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

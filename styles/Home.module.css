@@ -4,6 +4,12 @@
     gap: 2rem;
 }
 
+.section_title{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .card {
     border: 2px solid gray;
     padding: 1rem;
@@ -141,10 +147,6 @@
     padding: 1.5rem;
     z-index: 1;
 }
-  
-.textform_input::placeholder {
-    color: red;
-}
 
 .contact_form_tag{
     position: absolute;
@@ -154,6 +156,7 @@
     padding: 0.25rem;
     background-color: white;
     z-index: 10;
+    font-weight: 500;
 }
 
 .contact_form_area{
@@ -177,27 +180,6 @@
     border-radius: 20px;
     background-color: #f1f1f1;
 }
-
-.button {
-  display: inline-block;
-  /* background-color: var(--title-color);
-  color: var(--container-color); */
-  padding: 1.25rem 2rem;
-  border-radius: 1rem;
-  font-weight: var(--font-medium);
-}
-
-.button_flex {
-    display: inline-flex;
-    align-items: center;
-  }
-  
-.button_wrapper{
-display: flex;
-justify-content: center;
-align-items: center;
-}
-  
 
 
 @media screen and (max-width :420px) {
