@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
+import { useRouter } from 'next/router'
 
-const Navbar = (props) => {
-  const { username, onLogout, onModeToggle } = props;
+const Navbar = () => {
+  const router = useRouter();
+  const handleLogout = () =>{
+    localStorage.removeItem("auth-token");
+    router.push("/login");
+    router.reload();
+  }
+  const [authToken, setAuthToken] = useState()
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("auth-token"));
+  }, [router.query])
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -16,10 +26,10 @@ const Navbar = (props) => {
             Visit{" "}namanvarshney.com !
           </Link>
         </span>
-        <span className={styles.username}>Hi, Naman Varshney</span>
-        <button className={styles.button}>Login</button>
-        <button className={styles.button}>SignUp</button>
-        <button className={styles.button}>Logout</button>
+        { authToken ? <><span className={styles.username}>Hi, Naman Varshney</span>
+        <button className={styles.button} onClick={handleLogout}>Logout</button></>:<>
+        <Link href="/login"><button className={styles.button}>Login</button></Link>
+        <Link href="/signup"><button className={styles.button}>SignUp</button></Link></>}
       </div>
     </header>
   )
