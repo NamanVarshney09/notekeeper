@@ -3,7 +3,7 @@ import styles from '../styles/Auth.module.css'
 import { useRouter } from "next/router";
 
 const Signup = () => {
-  const host = "http://localhost:5000";
+  const host = "https://notekeeper-backend.vercel.app";
   const name = useRef();
   const email = useRef();
   const password = useRef();
@@ -14,8 +14,9 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password.current.value !== confirmPassword.current.value)
-      return;
+    if (password.current.value !== confirmPassword.current.value){
+      router.reload();
+    }
 
     const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
