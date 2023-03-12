@@ -4,12 +4,17 @@ import { useContext, useEffect, useState } from 'react'
 import noteContext from '@/context/notes/noteContext'
 import Note from '@/components/Note';
 import Addnote from '@/components/Addnote';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const context = useContext(noteContext);
   const { notes, fetchNotes, editNote } = context;
+  const router = useRouter();
   useEffect(() => {
-    fetchNotes();
+    if(localStorage.getItem("auth-token"))
+      fetchNotes();
+    else
+      router.push("/login");
   }, [])
 
   const [toggle, setToggle] = useState(0);
@@ -53,7 +58,7 @@ export default function Home() {
             <div className={styles.card_description}>Add description...</div>
             <div className={styles.plus} onClick={() => { setToggle(1) }}>+</div>
           </div>
-          {notes.map((note) => {
+          {!notes.error && notes.map((note) => {
             /*
               TODO: Each child in a list should have a unique "key" prop.
               * While returning multiple div's elements wrap all under one unique key.
