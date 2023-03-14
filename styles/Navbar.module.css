@@ -102,9 +102,6 @@ input[type="checkbox"]:checked+.slider:before {
 }
 
 .footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -126,7 +123,9 @@ input[type="checkbox"]:checked+.slider:before {
 }
 
 @media screen and (max-width:420px) {
-
+  .logo {
+    font-size: 1.3rem;
+  }
   .footer {
     flex-direction: column;
   }
@@ -140,6 +139,11 @@ input[type="checkbox"]:checked+.slider:before {
   }
 
   .username {
-    margin-right: 0;
+    margin-right: 0.5rem;
+  }
+
+  .button{
+    padding: 0.5rem 0.75rem;
+
   }
 }

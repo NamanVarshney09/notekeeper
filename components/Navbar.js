@@ -24,7 +24,7 @@ const Navbar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Image src={Logo} className={styles.mobile} alt="NoteKeeper" priority="high" />
+        <Image src={Logo} alt="NoteKeeper" priority="high" />
         <Link href="/">NoteKeeper</Link>
       </div>
       <div className={styles.user}>
@@ -35,8 +35,8 @@ const Navbar = () => {
         </span>
         {authToken ?
           <>
-            <span className={styles.username}>Hi, {user ? user : "User"}</span>
-            <button className={`${styles.button} ${styles.mobile}`} onClick={handleLogout}>Logout</button>
+            <span className={styles.username}>Hi, {user ? user.split(' ')[0] : "User"}</span>
+            <button className={`${styles.button}`} onClick={handleLogout}>Logout</button>
           </>
           :
           <>

@@ -76,7 +76,7 @@ button {
 
 @media screen and (max-width:420px){
   .section {
-    padding: 6rem 0 8rem;
+    padding: 6rem 0 2rem;
   }
   .container {
     margin: 0 3rem;
