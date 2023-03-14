@@ -1,7 +1,10 @@
+import Head from 'next/head'
 import { useRef, useState } from "react";
 import Link from "next/link";
 import styles from '../styles/Auth.module.css'
 import { useRouter } from "next/router";
+import Image from 'next/image'
+import Logo from '../public/favicon-96x96.png'
 
 const Login = () => {
     const host = "https://notekeeper-backend.vercel.app";
@@ -41,9 +44,14 @@ const Login = () => {
     }
 
     return (
+        <>
+        <Head>
+        <title>NoteKeeper | Login</title>
+        <meta name="description" content="Login page of NoteKeeper" />
+      </Head>
         <div className='section container'>
             <div className={styles.login}>
-                <h2>Welcome Back !!</h2>
+                <h2 className={styles.page_title}><Image src={Logo} alt="NoteKeeper" /><span>Welcome Back !!</span></h2>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.login_form_div}>
                         {isVisible.email && <label htmlFor="email" className={`${styles.login_form_tag}`}>Email</label>}
@@ -63,6 +71,7 @@ const Login = () => {
                 </p>
             </div>
         </div>
+        </>
     )
 }
 

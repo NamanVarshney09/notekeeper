@@ -1,6 +1,9 @@
+import Head from 'next/head'
 import { useRef, useState } from "react";
 import styles from '../styles/Auth.module.css'
 import { useRouter } from "next/router";
+import Image from 'next/image'
+import Logo from '../public/favicon-96x96.png'
 
 const Signup = () => {
   const host = "https://notekeeper-backend.vercel.app";
@@ -46,9 +49,14 @@ const Signup = () => {
       setIsVisible({...isVisible, [event.target.name] : false})
   }
   return (
+    <>
+    <Head>
+        <title>NoteKeeper | SignUp</title>
+        <meta name="description" content="Login page of NoteKeeper" />
+      </Head>
     <div className='section container'>
       <div className={styles.login}>
-        <h2>Welcome to NoteKeeper !!</h2>
+        <h2 className={styles.page_title}><span>Welcome to</span><Image src={Logo} alt="NoteKeeper"/><span>NoteKeeper !!</span> </h2>
         <form onSubmit={handleSubmit} className={styles.signup_form}>
           <div className={styles.signup_form_div}>
             {isVisible.name && <label htmlFor="name" className={`${styles.signup_form_tag}`}>Name</label>}
@@ -72,6 +80,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
+    </>
   )
 }
 
