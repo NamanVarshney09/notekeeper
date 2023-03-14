@@ -3,18 +3,20 @@
   position: fixed;
   top: 0;
   left: 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  /* background-color: #fff; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  /* color: #333; */
+  display: flex;
+  align-items: center;
 }
 
 .user {
@@ -25,6 +27,7 @@
 .username {
   margin-right: 1rem;
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .website {
@@ -98,18 +101,21 @@ input[type="checkbox"]:checked+.slider:before {
   transform: translateX(26px);
 }
 
-
 .footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #333;
+  background-color: #222;
   color: #fff;
   font-size: 0.9rem;
 }
 
 .footer a {
+  font-weight: 500;
   color: #fff;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -119,13 +125,21 @@ input[type="checkbox"]:checked+.slider:before {
   color: #bbb;
 }
 
-.left {
-  /* Make the left section take up 2/3 of the available width */
-  flex-basis: 66.67%;
-}
+@media screen and (max-width:420px) {
 
-.right {
-  /* Make the right section take up 1/3 of the available width */
-  flex-basis: 33.33%;
-  text-align: right;
+  .footer {
+    flex-direction: column;
+  }
+
+  .copyright {
+    margin-top: 1rem;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .username {
+    margin-right: 0;
+  }
 }

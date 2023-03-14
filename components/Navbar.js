@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import styles from '../styles/Navbar.module.css'
+import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import Image from 'next/image'
+import authContext from '@/context/auth/authContext'
+
+import Logo from '../public/favicon-32x32.png'
+import styles from '../styles/Navbar.module.css'
 
 const Navbar = () => {
   const router = useRouter();
-  const handleLogout = () =>{
+  const context = useContext(authContext);
+  const { user } = context
+
+  const handleLogout = () => {
     localStorage.removeItem("auth-token");
     router.push("/login");
     router.reload();
@@ -17,19 +24,25 @@ const Navbar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
+        <Image src={Logo} className={styles.mobile} alt="NoteKeeper" priority="high" />
         <Link href="/">NoteKeeper</Link>
       </div>
-
       <div className={styles.user}>
-        <span className={styles.username} >
+        <span className={`${styles.username} ${styles.mobile}`} >
           <Link href="https://namanvarshney.com" target="_blank">
             Visit{" "}namanvarshney.com !
           </Link>
         </span>
-        { authToken ? <><span className={styles.username}>Hi, Naman Varshney</span>
-        <button className={styles.button} onClick={handleLogout}>Logout</button></>:<>
-        <Link href="/login"><button className={styles.button}>Login</button></Link>
-        <Link href="/signup"><button className={styles.button}>SignUp</button></Link></>}
+        {authToken ?
+          <>
+            <span className={styles.username}>Hi, {user ? user : "User"}</span>
+            <button className={`${styles.button} ${styles.mobile}`} onClick={handleLogout}>Logout</button>
+          </>
+          :
+          <>
+            <Link href="/login"><button className={styles.button}>Login</button></Link>
+            <Link href="/signup"><button className={styles.button}>SignUp</button></Link>
+          </>}
       </div>
     </header>
   )
