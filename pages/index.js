@@ -6,6 +6,8 @@ import Addnote from '@/components/Addnote';
 import noteContext from '@/context/notes/noteContext'
 import authContext from '@/context/auth/authContext';
 import styles from '@/styles/Home.module.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const context = useContext(noteContext);
@@ -21,7 +23,18 @@ export default function Home() {
         const notesResponse = await fetchNotes();
         const userResponse = await fetchUser();
       }
-      fetchData();
+      fetchData().then(()=>{
+        toast.success('Logged in successfully !!', {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      });
     }
     else
       router.push("/login");
@@ -41,7 +54,18 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editNote(currentNote._id, currentNote.title, currentNote.description, currentNote.tag);
+    editNote(currentNote._id, currentNote.title, currentNote.description, currentNote.tag).then((result) => {
+      toast.success('Note updated successfully !', {
+        position: "bottom-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    });
     setToggle(0);
   }
 
@@ -96,7 +120,7 @@ export default function Home() {
                       <button className={`button button_flex ${styles.button}`}>
                         Update Note
                       </button>
-                      {/* <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" /> */}
+                      <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
                     </div>
                   </form>
                 </div>

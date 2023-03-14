@@ -5,6 +5,8 @@ import styles from '../styles/Auth.module.css'
 import { useRouter } from "next/router";
 import Image from 'next/image'
 import Logo from '../public/favicon-96x96.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const host = "https://notekeeper-backend.vercel.app";
@@ -28,9 +30,19 @@ const Login = () => {
             router.push('/');
         }
         else {
-            /**
-             TODO: Complete the errors
-             */
+            let message = response.error;
+            if (typeof response.error === 'object')
+                message = response.error[0].msg;
+            toast.info(`${message}`, {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         }
     };
 
@@ -45,32 +57,33 @@ const Login = () => {
 
     return (
         <>
-        <Head>
-        <title>NoteKeeper | Login</title>
-        <meta name="description" content="Login page of NoteKeeper" />
-      </Head>
-        <div className='section container'>
-            <div className={styles.login}>
-                <h2 className={styles.page_title}><Image src={Logo} alt="NoteKeeper" /><span>Welcome Back !!</span></h2>
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.login_form_div}>
-                        {isVisible.email && <label htmlFor="email" className={`${styles.login_form_tag}`}>Email</label>}
-                        <input ref={email} className={styles.email} type="email" name="email" required placeholder={isVisible.email ? "" : "Email address"} onFocus={handleFocus} onBlur={handleBlur} />
-                    </div>
-                    <div className={styles.login_form_div}>
-                        {isVisible.password && <label htmlFor="password" className={`${styles.login_form_tag}`}>Password</label>}
-                        <input ref={password} className={styles.password} type="password" name="password" placeholder={isVisible.password ? "" : "Password"} onFocus={handleFocus} onBlur={handleBlur} required />
-                    </div>
-                    <div className="button_wrapper">
-                        <button type="submit" className={styles.button}>Login</button>
-                    </div>
-                </form>
-                <p className={styles.signup}>
-                    Don't have an account ? {" "}
-                    <Link href="/signup"><span className={styles.signupword}>SignUp</span></Link>
-                </p>
+            <Head>
+                <title>NoteKeeper | Login</title>
+                <meta name="description" content="Login page of NoteKeeper" />
+            </Head>
+            <div className='section container'>
+                <div className={styles.login}>
+                    <h2 className={styles.page_title}><Image src={Logo} alt="NoteKeeper" /><span>Welcome Back !!</span></h2>
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                        <div className={styles.login_form_div}>
+                            {isVisible.email && <label htmlFor="email" className={`${styles.login_form_tag}`}>Email</label>}
+                            <input ref={email} className={styles.email} type="email" name="email" required placeholder={isVisible.email ? "" : "Email address"} onFocus={handleFocus} onBlur={handleBlur} />
+                        </div>
+                        <div className={styles.login_form_div}>
+                            {isVisible.password && <label htmlFor="password" className={`${styles.login_form_tag}`}>Password</label>}
+                            <input ref={password} className={styles.password} type="password" name="password" placeholder={isVisible.password ? "" : "Password"} onFocus={handleFocus} onBlur={handleBlur} required />
+                        </div>
+                        <div className="button_wrapper">
+                            <button type="submit" className={styles.button}>Login</button>
+                        </div>
+                        <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
+                    </form>
+                    <p className={styles.signup}>
+                        Don't have an account ? {" "}
+                        <Link href="/signup"><span className={styles.signupword}>SignUp</span></Link>
+                    </p>
+                </div>
             </div>
-        </div>
         </>
     )
 }

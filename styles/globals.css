@@ -6,6 +6,9 @@
   box-sizing: border-box;
 }
 
+:root{
+  --toastify-color-info: #fff  !important;
+}
 
 html {
   scroll-behavior: smooth;

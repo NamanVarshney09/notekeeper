@@ -1,11 +1,13 @@
 import noteContext from '@/context/notes/noteContext'
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import styles from '../styles/Addnote.module.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Addnote = (props) => {
     const context = useContext(noteContext);
     const { addNote } = context;
-    const {setToggle} = props;
+    const { setToggle } = props;
 
     const title = useRef();
     const description = useRef();
@@ -13,7 +15,18 @@ const Addnote = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addNote(title.current.value, description.current.value, tag.current.value);
+        addNote(title.current.value, description.current.value, tag.current.value).then((result) => {
+            toast.success('Note added successfully !', {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        })
         e.target.reset();
         setToggle(0);
     }
@@ -37,7 +50,7 @@ const Addnote = (props) => {
                     <button className={`button button_flex ${styles.button}`}>
                         Save Note
                     </button>
-                    {/* <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" /> */}
+                    <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
                 </div>
             </form>
         </>
