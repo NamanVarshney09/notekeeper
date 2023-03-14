@@ -1,14 +1,14 @@
-.contact_form{
+.notes_form{
     width: 400px;
 }
 
-.contact_form_div{
+.notes_form_div{
     position: relative;
     margin-bottom: 2rem;
     height: 4rem;
 }
 
-.contact_form_input{
+.notes_form_input{
     position: absolute;
     top: 0;
     left: 0;
@@ -22,13 +22,14 @@
     padding: 1.5rem;
     z-index: 1;
     font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
 }
   
-.contact_form_tag{
+.notes_form_tag{
     position: absolute;
-    top: -0.75rem;
+    top: -0.9rem;
     left: 1.25rem;
-    font-size: var(--smaller-font-size);
+    font-size: 0.9rem;
     padding: 0.25rem;
     background-color: white;
     z-index: 10;
@@ -36,24 +37,30 @@
     font-weight: 500;
 }
 
-.contact_form_area{
+.notes_form_area{
     height: 11rem;
 }
 
-.contact_form_area textarea{
+.notes_form_area textarea{
     resize: none;
 }
 
-.contact_form_area textarea::-webkit-scrollbar {
+.notes_form_area textarea::-webkit-scrollbar {
     width: 10px;
 }
    
-.contact_form_area textarea::-webkit-scrollbar-thumb {
+.notes_form_area textarea::-webkit-scrollbar-thumb {
     border-radius: 20px;
     background-color: #2f2f2f;
 }
 
-.contact_form_area textarea::-webkit-scrollbar-track {
+.notes_form_area textarea::-webkit-scrollbar-track {
     border-radius: 20px;
     background-color: #f1f1f1;
+}
+
+@media screen and (max-width:420px){
+    .notes_form{
+        width: 100%;
+    }
 }

@@ -20,18 +20,18 @@ const Addnote = (props) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className={`${styles.contact_form}`}>
-                <div className={`${styles.contact_form_div}`}>
-                    <label htmlFor="title" className={`${styles.contact_form_tag}`}>Title</label>
-                    <input ref={title} type="text" name="title" className={`${styles.contact_form_input}`} placeholder="Enter note title" required />
+            <form onSubmit={handleSubmit} className={`${styles.notes_form}`}>
+                <div className={`${styles.notes_form_div}`}>
+                    <label htmlFor="title" className={`${styles.notes_form_tag}`}>Title</label>
+                    <input ref={title} type="text" name="title" className={`${styles.notes_form_input}`} placeholder="Enter note title" required />
                 </div>
-                <div className={`${styles.contact_form_div} ${styles.contact_form_area}`}>
-                    <label htmlFor="description" className={`${styles.contact_form_tag}`}>Description</label>
-                    <textarea ref={description} name="description" className={`${styles.contact_form_input}`} cols="30" rows="10" minLength={10} placeholder='Enter note description' required></textarea>
+                <div className={`${styles.notes_form_div} ${styles.notes_form_area}`}>
+                    <label htmlFor="description" className={`${styles.notes_form_tag}`}>Description</label>
+                    <textarea ref={description} name="description" className={`${styles.notes_form_input}`} cols="30" rows="10" minLength={10} placeholder='Enter note description' required></textarea>
                 </div>
-                <div className={`${styles.contact_form_div}`}>
-                    <label htmlFor="tag" className={`${styles.contact_form_tag}`}>Tag</label>
-                    <input ref={tag} type="text" name="tag" className={`${styles.contact_form_input}`} placeholder="Enter Tag for the note" />
+                <div className={`${styles.notes_form_div}`}>
+                    <label htmlFor="tag" className={`${styles.notes_form_tag}`}>Tag</label>
+                    <input ref={tag} type="text" name="tag" className={`${styles.notes_form_input}`} placeholder="Enter Tag for the note" />
                 </div>
                 <div className='button_wrapper'>
                     <button className={`button button_flex ${styles.button}`}>
