@@ -34,3 +34,14 @@
     font-size: 1.1rem;
     padding: 0.5rem 0;
 }
+
+@media screen and (max-width: 420px) {
+    .card {
+        border: 2px solid gray;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        height: auto;
+        overflow: hidden;
+        position: relative;
+    }
+}

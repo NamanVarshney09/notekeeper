@@ -29,7 +29,7 @@ button {
 }
 
 .section {
-  padding: 8rem 0 2rem;
+  padding: 8rem 0 4rem;
 }
 
 .container {
@@ -53,10 +53,10 @@ button {
   display: inline-block;
   background-color: black;
   color: white;
-  padding: 1.25rem 2rem;
+  padding: 1rem 1.5rem;
   border-radius: 1rem;
   font-weight: 550;
-  font-size: 1.11rem;
+  font-size: 1rem;
 }
 
 .button_flex {
@@ -64,9 +64,18 @@ button {
   align-items: center;
 }
 
-
 .button_wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+@media screen and (max-width:420px){
+  .section {
+    padding: 6rem 0 8rem;
+  }
+  .container {
+    margin: 0 3rem;
+  }
 }
