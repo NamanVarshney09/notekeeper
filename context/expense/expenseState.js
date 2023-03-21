@@ -1,0 +1,84 @@
+import { useState } from "react";
+import ExpenseContext from "./expenseContext";
+
+const ExpenseState = (props) => {
+  const host = "https://notekeeper-backend.vercel.app";
+
+  const [expenses, setExpenses] = useState([])
+
+  const fetchExpenses = async () => {
+    const response = await fetch(`${host}/api/expenses/fetchexpenses`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("auth-token"),
+      }
+    });
+    const data = await response.json();
+    setExpenses(data);
+  }
+
+  const addExpense = async (name, amount, category, mode) => {
+    const response = await fetch(`${host}/api/expenses/addexpense`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("auth-token"),
+      },
+      body: JSON.stringify({name, amount, category, mode })
+    });
+    const expense = await response.json();
+    setExpenses([...expenses, expense]);
+  }
+
+  const editExpense = async (id, name, amount, category) => {
+    const response = await fetch(`${host}/api/expenses/updateexpense/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("auth-token"),
+      },
+      body: JSON.stringify({ name, amount, category })
+    });
+    const data = await response.json();
+
+    const updatedExpenses = expenses.map((expense) => {
+      if (expense._id === id) {
+        {
+          expense.title = title;
+          expense.description = description;
+          expense.tag = tag;
+        }
+      }
+      return expense;
+    })
+    setExpenses(updatedExpenses)
+  }
+
+  const deleteExpense = async (id) => {
+    const response = await fetch(`${host}/api/expenses/deleteexpense/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("auth-token"),
+      }
+    });
+    const data = await response.json();
+    const filteredExpenses = notes.filter((expense) => { return expense._id !== id })
+    setNotes(filteredExpenses)
+  }
+
+  const totalExpenses = () =>{
+    let userTotalExpenses = 0;
+    const total = expenses.map((expense)=>{userTotalExpenses+expense})
+    return total[0];
+  }
+
+  return (
+    <ExpenseContext.Provider value={{ expenses, addExpense, editExpense, deleteExpense, fetchExpenses, totalExpenses }}>
+      {props.children}
+    </ExpenseContext.Provider>
+  )
+}
+
+export default ExpenseState
