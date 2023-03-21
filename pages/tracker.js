@@ -71,8 +71,7 @@ const Tracker = () => {
                         <label htmlFor="category">Category</label>
                     </div>
                     <div className={`${styles.form_div} ${styles.button_group}`}>
-                        <button type='button' onClick={() => setMode("UPI")} className={` ${mode === "UPI" ? styles.selected : ''} ${styles.choice_button}`}
-                            name='mode' value='UPI'>UPI</button>
+                        <button type='button' onClick={() => setMode("UPI")} className={` ${mode === "UPI" ? styles.selected : ''} ${styles.choice_button}`} name='mode' value='UPI'>UPI</button>
                         <button type='button' onClick={() => setMode("Cash")} className={` ${mode === "Cash" ? styles.selected : ''} ${styles.choice_button}`} name='mode' value='Cash'>Cash</button>
                     </div>
                     <div className='button_wrapper'>

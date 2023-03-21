@@ -9,7 +9,7 @@ const ExpenseCard = (props) => {
         <div className={styles.card_title}>
           <span>&#8377; {expense.amount}</span>
           <div>
-            <i className="fa-regular fa-pen-to-square" ></i>
+            {/* <i className="fa-regular fa-pen-to-square" ></i> */}
             {/* <i className="fa-solid fa-trash" onClick={handleDelete}></i> */}
           </div>
         </div>
