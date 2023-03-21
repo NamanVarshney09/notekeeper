@@ -4,6 +4,11 @@
     gap: 2rem;
 }
 
+.expense_button{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
 .section_title{
     font-size: 2rem;
     text-align: center;

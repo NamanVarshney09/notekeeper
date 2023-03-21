@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import Head from 'next/head'
-import Link from 'next/Link'
+import Link from 'next/link'
 import Note from '@/components/Note';
 import Addnote from '@/components/Addnote';
 import noteContext from '@/context/notes/noteContext'
@@ -79,7 +79,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="section container">
-        <Link href='/tracker'><button className="button button_flex">Track your Expenses</button> </Link>
+        <div className={styles.expense_button}><Link href='/tracker'><button className="button button_flex">Track your Expenses</button> </Link></div>
         <h2 className={styles.section_title}>Notes</h2>
         <div className={toggle === 1 ? `${styles.modal} ${styles.active_modal}` : `${styles.modal}`}>
           <div className={styles.modal_content}>
