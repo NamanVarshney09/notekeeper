@@ -108,28 +108,39 @@
     position: relative;
 }
 
-.category_badge {
+.date_badge {
+    position: absolute;
+    top: 0.1rem;
+    right: -0.1rem;
+    padding: 0 0.5rem;
+    font-size: 0.7rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.category_badge{
     position: absolute;
     bottom: 0;
     right: 0;
     background-color: black;
     color: white;
     padding: 0 0.5rem;
-    font-size: 0.8rem;
-    border-radius: 0.5rem;
+    font-size: 0.7rem;
+    border-radius: 0.3rem;
     font-weight: 500;
     cursor: pointer;
 }
 
 .mode_badge{
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 0;
+    left: 0;
     background-color: black;
     color: white;
-    padding: 0 0.5rem;
-    font-size: 0.7rem;
-    border-radius: 0.5rem;
+    padding: 0 0.3rem;
+    font-size: 0.6rem;
+    border-top-right-radius: 0.3rem;
     font-weight: 500;
     cursor: pointer;
 }
@@ -157,8 +168,8 @@
     color: white;
     font-size: 1.5rem;
     margin: 2rem 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
+    padding: 0.6rem;
+    border-radius: 0.4rem;
     font-family: 'Poppins', sans-serif;
 }
 

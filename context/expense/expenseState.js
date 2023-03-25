@@ -5,6 +5,7 @@ const ExpenseState = (props) => {
   const host = "https://notekeeper-backend.vercel.app";
 
   const [expenses, setExpenses] = useState([])
+  const [totalExpenses, setTotalExpenses] = useState(0);
 
   const fetchExpenses = async () => {
     const response = await fetch(`${host}/api/expenses/fetchexpenses`, {
@@ -15,7 +16,9 @@ const ExpenseState = (props) => {
       }
     });
     const data = await response.json();
-    setExpenses(data);
+    setExpenses(data.expenses);
+    const formattedTotalExpenses = data.totalExpenses.toLocaleString("en-US");
+    setTotalExpenses(formattedTotalExpenses);
   }
 
   const addExpense = async (name, amount, category, mode) => {
@@ -68,14 +71,8 @@ const ExpenseState = (props) => {
     setNotes(filteredExpenses)
   }
 
-  const totalExpenses = () =>{
-    let userTotalExpenses = 0;
-    const total = expenses.map((expense)=>{userTotalExpenses+expense})
-    return total[0];
-  }
-
   return (
-    <ExpenseContext.Provider value={{ expenses, addExpense, editExpense, deleteExpense, fetchExpenses, totalExpenses }}>
+    <ExpenseContext.Provider value={{ expenses, addExpense, editExpense, deleteExpense, fetchExpenses, totalExpenses}}>
       {props.children}
     </ExpenseContext.Provider>
   )

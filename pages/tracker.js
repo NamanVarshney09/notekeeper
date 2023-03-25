@@ -9,14 +9,13 @@ import styles from '../styles/Expense.module.css'
 
 const Tracker = () => {
     const context = useContext(expenseContext);
-    const { expenses, fetchExpenses, addExpense, totalExpenses } = context
+    const { expenses, fetchExpenses, addExpense, totalExpenses } = context;
 
     const router = useRouter();
     const name = useRef();
     const amount = useRef();
     const category = useRef();
     const [mode, setMode] = useState("");
-    // const [totalExpense, setTotalExpense] = useState(0)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,18 +35,11 @@ const Tracker = () => {
     }
 
     useEffect(() => {
-        if (localStorage.getItem("auth-token")) {
-            async function fetchData() {
-                const expensesResponse = await fetchExpenses();
-                // const total = await totalExpenses();
-                // setTotalExpense(total);
-                // console.log("🚀 ~ file: expense.js:44 ~ fetchData ~ totalExpense:", totalExpense)
-            }
-            fetchData()
-        }
+        if (localStorage.getItem("auth-token"))
+            fetchExpenses();
         else
             router.push("/login");
-    }, [])
+    }, [router.events])
 
     return (
         <>
@@ -81,9 +73,9 @@ const Tracker = () => {
                         <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
                     </div>
                 </form>
-                {/* <span className={styles.total_expense}>
-                    Total : &#8377; {totalExpense}
-                </span> */}
+                <span className={styles.total_expense}>
+                    Total : &#8377; {totalExpenses}
+                </span>
                 <div className={`${styles.card_container}`}>
                     {expenses.map((expense) => {
                         return <ExpenseCard expense={expense} key={expense._id} />
