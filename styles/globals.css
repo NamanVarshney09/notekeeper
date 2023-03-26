@@ -86,6 +86,36 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+select {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  appearance: none; /* remove default arrow icon */
+  -webkit-appearance: none; /* fix for Safari */
+  -moz-appearance: none; /* fix for Firefox */
+  cursor: pointer;
+  text-align: center;
+}
+
+select:focus {
+  outline: none;
+  border-color: black;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+option {
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+option:hover, option:checked, option:focus{
+  background-color: black;
+  color: white;
+}
+
 @media screen and (max-width:420px){
   .section {
     padding: 6rem 0 2rem;

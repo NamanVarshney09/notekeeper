@@ -124,7 +124,7 @@ input[type="checkbox"]:checked+.slider:before {
 
 @media screen and (max-width:420px) {
   .logo {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
   .footer {
     flex-direction: column;

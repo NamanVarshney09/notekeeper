@@ -1,11 +1,14 @@
 import { useState } from "react";
 import ExpenseContext from "./expenseContext";
+import moment from "moment";
 
 const ExpenseState = (props) => {
   const host = "https://notekeeper-backend.vercel.app";
 
-  const [expenses, setExpenses] = useState([])
+  const [expenses, setExpenses] = useState([]);
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [categories, setCategories] = useState([]);
+  const [dates, setDates] = useState([])
 
   const fetchExpenses = async () => {
     const response = await fetch(`${host}/api/expenses/fetchexpenses`, {
@@ -18,7 +21,14 @@ const ExpenseState = (props) => {
     const data = await response.json();
     setExpenses(data.expenses);
     const formattedTotalExpenses = data.totalExpenses.toLocaleString("en-US");
+    setCategories(["All", ...new Set(data.expenses.map((expense) => expense.category))]);
+    setDates(["All", ...new Set(data.expenses.map((expense) => {
+      const formattedDate = moment(expense.date).format("ddd, DD MMM")
+      return formattedDate;
+    }
+    ))])
     setTotalExpenses(formattedTotalExpenses);
+    return data.expenses;
   }
 
   const addExpense = async (name, amount, category, mode) => {
@@ -28,7 +38,7 @@ const ExpenseState = (props) => {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("auth-token"),
       },
-      body: JSON.stringify({name, amount, category, mode })
+      body: JSON.stringify({ name, amount, category, mode })
     });
     const expense = await response.json();
     setExpenses([...expenses, expense]);
@@ -72,7 +82,7 @@ const ExpenseState = (props) => {
   }
 
   return (
-    <ExpenseContext.Provider value={{ expenses, addExpense, editExpense, deleteExpense, fetchExpenses, totalExpenses}}>
+    <ExpenseContext.Provider value={{ expenses, setExpenses, addExpense, editExpense, deleteExpense, fetchExpenses, totalExpenses, categories, dates }}>
       {props.children}
     </ExpenseContext.Provider>
   )
