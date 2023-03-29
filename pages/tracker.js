@@ -141,7 +141,7 @@ const Tracker = () => {
                     </div>
                 </div>
                 {(selectedCategory !== "All" || selectedDate !== "All") && <div className={styles.filter_total_expense}>
-                    Expenses with current filters : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong>
+                    Filtered Expenses : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong>
                 </div>}
                 <div className={`${styles.card_container}`}>
                     {filteredExpenses.map((expense) => {
