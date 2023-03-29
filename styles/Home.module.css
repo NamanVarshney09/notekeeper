@@ -44,7 +44,7 @@
     align-items: center;
     justify-content: center;
     border: 2px dotted black;
-    border-radius: 50%;
+    border-radius: 0.5rem;
     /* padding-bottom:1rem; */
 }
 
@@ -188,6 +188,26 @@
     background-color: #f1f1f1;
 }
 
+.home_scroll {
+    position: fixed;
+    right: 2.5rem;
+    bottom: -20%;
+    background-color: black;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    z-index: 10;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.home_scroll_icon {
+    color: white;
+    font-size: 1rem;
+}
+
+.home_scroll_show {
+    bottom: 3rem;
+}
 
 @media screen and (max-width :420px) {
     .card_container{
@@ -201,6 +221,15 @@
 
     .contact_form{
         width: 100%;
+    }
+
+    .home_scroll {
+        right: 1rem;
+        bottom: 2rem;
+    }
+
+    .home_scroll_icon {
+        font-size: 0.8rem;
     }
 }
 
