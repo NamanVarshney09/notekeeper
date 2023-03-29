@@ -89,10 +89,10 @@ export default function Home() {
           </div>
         </div>  
         <div className={`${styles.card_container}`}>
-          <div className={styles.card}>
+          <div className={styles.card}  onClick={() => { setToggle(1) }}>
             <div className={styles.card_title}>Add title...</div>
             <div className={styles.card_description}>Add description...</div>
-            <div className={styles.plus} onClick={() => { setToggle(1) }}>+</div>
+            <div className={styles.plus}>+</div>
           </div>
           {!notes.error && notes.map((note) => {
             /*

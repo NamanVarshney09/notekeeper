@@ -21,9 +21,10 @@ const Tracker = () => {
     const amount = useRef();
     const category = useRef();
     const [mode, setMode] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("All")
-    const [selectedDate, setSelectedDate] = useState("All")
+    const [selectedCategory, setSelectedCategory] = useState("All");
+    const [selectedDate, setSelectedDate] = useState("All");
     const [filteredExpenses, setFilteredExpenses] = useState(expenses);
+    const [newExpense, setNewExpense] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,6 +39,7 @@ const Tracker = () => {
                 progress: undefined,
                 theme: "light",
             });
+            setNewExpense(!newExpense)
         })
         e.target.reset();
     }
@@ -53,10 +55,9 @@ const Tracker = () => {
         }
         else
             router.push("/login");
-    }, [router.events,expenses])
+    }, [router.events, newExpense])
 
     useEffect(() => {
-        console.log(selectedCategory, selectedDate);
         if (selectedCategory === "All" && selectedDate === "All")
             setFilteredExpenses(expenses);
         else if (selectedCategory !== "All" && selectedDate === "All")
@@ -67,7 +68,7 @@ const Tracker = () => {
             setFilteredExpenses(expenses.filter((expense) => { return expense.category === selectedCategory && moment(expense.date).format('ddd, DD MMM') === selectedDate }));
         else
             setFilteredExpenses(expenses)
-    }, [selectedCategory, selectedDate, expenses])
+    }, [selectedCategory, selectedDate])
 
     return (
         <>
