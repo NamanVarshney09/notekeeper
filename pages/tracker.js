@@ -27,6 +27,7 @@ const Tracker = () => {
     const [mode, setMode] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
     const [filteredExpenses, setFilteredExpenses] = useState(expenses);
     const [newExpense, setNewExpense] = useState(true);
     const [filteredTotalExpenses, setFilteredTotalExpenses] = useState(0);
@@ -68,9 +69,16 @@ const Tracker = () => {
     useEffect(() => {
         let formattedSelectedDate = moment(selectedDate).format("ddd, DD MMM");
         if (selectedCategory === "All" && selectedDate == null)
+        let formattedSelectedDate = moment(selectedDate).format("ddd, DD MMM");
+        if (selectedCategory === "All" && selectedDate == null)
             setFilteredExpenses(expenses);
         else if (selectedCategory !== "All" && selectedDate == null)
+        else if (selectedCategory !== "All" && selectedDate == null)
             setFilteredExpenses(expenses.filter((expense) => expense.category === selectedCategory));
+        else if (selectedCategory === "All" && selectedDate !== null)
+            setFilteredExpenses(expenses.filter((expense) => moment(expense.date).format('ddd, DD MMM') === formattedSelectedDate))
+        else if (selectedCategory !== "All" && selectedDate !== null)
+            setFilteredExpenses(expenses.filter((expense) => { return expense.category === selectedCategory && moment(expense.date).format('ddd, DD MMM') === formattedSelectedDate }));
         else if (selectedCategory === "All" && selectedDate !== null)
             setFilteredExpenses(expenses.filter((expense) => moment(expense.date).format('ddd, DD MMM') === formattedSelectedDate))
         else if (selectedCategory !== "All" && selectedDate !== null)
@@ -124,6 +132,7 @@ const Tracker = () => {
                 <span className={styles.total_expense}>
                     Total : &#8377; {totalExpenses}
                 </span>
+                {/* <Chart data={data} /> */}
                 <div className={styles.filters_container}>
                     <div className={styles.dropdown_menu}>
                         <label className={styles.dropdown_label} htmlFor="categoriesDropdown">Category</label>
@@ -138,13 +147,24 @@ const Tracker = () => {
                         {/* <select id="dateDropdown" className={styles.dropdown_menu_select} onChange={(event) => { setSelectedDate(event.target.value) }}>
                             <option value={moment(Date.now).format("ddd, DD MMM")}>Today</option>
                             <option value={null} >All</option>
+                        {/* <select id="dateDropdown" className={styles.dropdown_menu_select} onChange={(event) => { setSelectedDate(event.target.value) }}>
+                            <option value={moment(Date.now).format("ddd, DD MMM")}>Today</option>
+                            <option value={null} >All</option>
                             {dates.map((date, index) => {
                                 return <option value={date} key={index}>{date}</option>
                             })}
                         </select> */}
                         <DatePicker isClearable={true} id="dateDropdown" placeholderText='All' className={`${styles.dropdown_menu_select} ${styles.datepicker}`} focusSelectedMonth='true' allowSameDay='true' selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="dd MMMM" highlightDates={[new Date()]} />
+                        </select> */}
+                        <DatePicker isClearable={true} id="dateDropdown" placeholderText='All' className={`${styles.dropdown_menu_select} ${styles.datepicker}`} focusSelectedMonth='true' allowSameDay='true' selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="dd MMMM" highlightDates={[new Date()]} />
                     </div>
                 </div>
+                {(selectedCategory !== "All" || selectedDate !== null) &&
+                    <div className={styles.filters_section}>
+                        <div className={styles.filter_total_expense}>Filtered Expenses : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong></div>
+                        <div className={styles.clear_filters} onClick={() => { setSelectedDate(null); setSelectedCategory("All"); }}>Reset</div>
+                    </div>
+                }
                 {(selectedCategory !== "All" || selectedDate !== null) &&
                     <div className={styles.filters_section}>
                         <div className={styles.filter_total_expense}>Filtered Expenses : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong></div>
