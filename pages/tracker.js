@@ -155,12 +155,6 @@ const Tracker = () => {
                         <div className={styles.clear_filters} onClick={() => { setSelectedDate(null); setSelectedCategory("All"); }}>Reset</div>
                     </div>
                 }
-                {(selectedCategory !== "All" || selectedDate !== null) &&
-                    <div className={styles.filters_section}>
-                        <div className={styles.filter_total_expense}>Filtered Expenses : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong></div>
-                        <div className={styles.clear_filters} onClick={() => { setSelectedDate(null); setSelectedCategory("All"); }}>Reset</div>
-                    </div>
-                }
                 <div className={`${styles.card_container}`}>
                     {filteredExpenses.map((expense) => {
                         return <ExpenseCard expense={expense} key={expense._id} />
