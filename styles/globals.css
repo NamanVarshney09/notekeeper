@@ -116,6 +116,16 @@ option:hover, option:checked, option:focus{
   color: white;
 }
 
+.react-datepicker__close-icon::after{
+  background-color: rgb(128, 128, 128, 0.6) !important;
+  color: black !important;
+  width: 1rem !important;
+  height: 1rem !important;
+  padding: 0.1rem 0.05rem 0.05rem 0.1rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
 @media screen and (max-width:420px){
   .section {
     padding: 6rem 0 2rem;
