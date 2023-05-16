@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from '../styles/Expense.module.css'
 import moment from 'moment';
 import { Quotes } from '@/components/Quotes'
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const Tracker = () => {
     const context = useContext(expenseContext);
@@ -23,11 +26,11 @@ const Tracker = () => {
     const category = useRef();
     const [mode, setMode] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const [selectedDate, setSelectedDate] = useState("All");
+    const [selectedDate, setSelectedDate] = useState(null);
     const [filteredExpenses, setFilteredExpenses] = useState(expenses);
     const [newExpense, setNewExpense] = useState(true);
     const [filteredTotalExpenses, setFilteredTotalExpenses] = useState(0);
-    const [titleQuote, setTitleQuote] = useState("")
+    const [titleQuote, setTitleQuote] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -63,14 +66,15 @@ const Tracker = () => {
     }, [router.events, newExpense])
 
     useEffect(() => {
-        if (selectedCategory === "All" && selectedDate === "All")
+        let formattedSelectedDate = moment(selectedDate).format("ddd, DD MMM");
+        if (selectedCategory === "All" && selectedDate == null)
             setFilteredExpenses(expenses);
-        else if (selectedCategory !== "All" && selectedDate === "All")
+        else if (selectedCategory !== "All" && selectedDate == null)
             setFilteredExpenses(expenses.filter((expense) => expense.category === selectedCategory));
-        else if (selectedCategory === "All" && selectedDate !== "All")
-            setFilteredExpenses(expenses.filter((expense) => moment(expense.date).format('ddd, DD MMM') === selectedDate))
-        else if (selectedCategory !== "All" && selectedDate !== "All")
-            setFilteredExpenses(expenses.filter((expense) => { return expense.category === selectedCategory && moment(expense.date).format('ddd, DD MMM') === selectedDate }));
+        else if (selectedCategory === "All" && selectedDate !== null)
+            setFilteredExpenses(expenses.filter((expense) => moment(expense.date).format('ddd, DD MMM') === formattedSelectedDate))
+        else if (selectedCategory !== "All" && selectedDate !== null)
+            setFilteredExpenses(expenses.filter((expense) => { return expense.category === selectedCategory && moment(expense.date).format('ddd, DD MMM') === formattedSelectedDate }));
         else
             setFilteredExpenses(expenses)
     }, [selectedCategory, selectedDate])
@@ -93,7 +97,6 @@ const Tracker = () => {
             </Head>
             <div className="section container">
                 <h2 className={styles.section_title}>{titleQuote}</h2>
-                {/* <h2 className={styles.section_title}>"The habit of managing your money is more important than the amount."</h2> */}
                 <form onSubmit={handleSubmit} className={`${styles.form}`}>
                     <div className={`${styles.form_div}`}>
                         <input ref={name} type="text" name="name" className={`${styles.form_input}`} required autoComplete="off" />
@@ -124,7 +127,7 @@ const Tracker = () => {
                 <div className={styles.filters_container}>
                     <div className={styles.dropdown_menu}>
                         <label className={styles.dropdown_label} htmlFor="categoriesDropdown">Category</label>
-                        <select id="categoriesDropdown" onChange={(event) => { setSelectedCategory(event.target.value) }}>
+                        <select id="categoriesDropdown" className={styles.dropdown_menu_select} onChange={(event) => { setSelectedCategory(event.target.value) }}>
                             {categories.map((category, index) => {
                                 return <option className='dropdownOptions' value={category} key={index}>{category}</option>
                             })}
@@ -132,17 +135,22 @@ const Tracker = () => {
                     </div>
                     <div className={styles.dropdown_menu}>
                         <label className={styles.dropdown_label} htmlFor="dateDropdown">Date</label>
-                        <select id="dateDropdown" onChange={(event) => { setSelectedDate(event.target.value) }}>
-                            <option value={moment(Date.now()).format("ddd, DD MMM")}>Today</option>
+                        {/* <select id="dateDropdown" className={styles.dropdown_menu_select} onChange={(event) => { setSelectedDate(event.target.value) }}>
+                            <option value={moment(Date.now).format("ddd, DD MMM")}>Today</option>
+                            <option value={null} >All</option>
                             {dates.map((date, index) => {
                                 return <option value={date} key={index}>{date}</option>
                             })}
-                        </select>
+                        </select> */}
+                        <DatePicker isClearable={true} id="dateDropdown" placeholderText='All' className={`${styles.dropdown_menu_select} ${styles.datepicker}`} focusSelectedMonth='true' allowSameDay='true' selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="dd MMMM" highlightDates={[new Date()]} />
                     </div>
                 </div>
-                {(selectedCategory !== "All" || selectedDate !== "All") && <div className={styles.filter_total_expense}>
-                    Filtered Expenses : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong>
-                </div>}
+                {(selectedCategory !== "All" || selectedDate !== null) &&
+                    <div className={styles.filters_section}>
+                        <div className={styles.filter_total_expense}>Filtered Expenses : <strong>&#8377; {filteredTotalExpenses.toLocaleString()}</strong></div>
+                        <div className={styles.clear_filters} onClick={() => { setSelectedDate(null); setSelectedCategory("All"); }}>Reset</div>
+                    </div>
+                }
                 <div className={`${styles.card_container}`}>
                     {filteredExpenses.map((expense) => {
                         return <ExpenseCard expense={expense} key={expense._id} />
